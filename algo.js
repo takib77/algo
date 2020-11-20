@@ -3,62 +3,66 @@
 const numberGroup = [435, 5454, 23, 8, 765, 5346, 1646, 23, 60];
 console.log('A vizsgált tömb:', numberGroup)
 
+
 // TÖMB ELEMEINEK MINIMUMA
 
 function minimumCalc(arr) {
     let minimum = arr[0];
-    for (let i = 0; i < arr.length; i += 1) {
+    for (let i = 1; i < arr.length; i += 1) {
         if (arr[i] < minimum) {
             minimum = arr[i];
         }
     }
-    console.log('1. A minimum érték', minimum);
+    return minimum;
 }
-minimumCalc(numberGroup);
+console.log('1. A minimum érték', minimumCalc(numberGroup));
+
 
 // TÖMB ELEMEINEK MAXIMUMA
 
 function maximumCalc(arr) {
     let maximum = arr[0];
-    for (let i = 0; i < arr.length; i += 1) {
+    for (let i = 1; i < arr.length; i += 1) {
         if (arr[i] > maximum) {
             maximum = arr[i];
         }
     }
-    console.log('2. A maximum érték:', maximum);
+    return maximum;
 }
-maximumCalc(numberGroup);
+console.log('2. A maximum érték:', maximumCalc(numberGroup));
+
 
 // TÖMB ELEMEINEK ÖSSZEGE, MAJD ÁTLAGA
 
-function averageCalc(arr) {
+function sumCalc(arr) {
     let sum = 0;
-    let average = 0;
     for (let i = 0; i < arr.length; i += 1) {
         sum += arr[i];
-        average = sum / arr.length;
     }
-    console.log('3. Számok összege:', sum);
-    console.log('4. Számok átlaga:', average);
+    return sum;
 }
 
-averageCalc(numberGroup);
+function averageCalc(arr) {
+    return sumCalc(arr) / arr.length;
+}
 
-// PÁROS ÉS PÁRATLAN ELEMEK SZÁMA
+console.log('3. Számok összege:', sumCalc(numberGroup), '  4. Számok átlaga:', averageCalc(numberGroup));
 
-function evensAndOddsCount(arr) {
-    let evenCount = 0;
-    let oddCount = 0;
+
+// PÁROS ELEMEK SZÁMA
+
+function evensCount(arr) {
+    let evensCount = 0;
     for (let i = 0; i < arr.length; i += 1) {
         if (arr[i] % 2 === 0) {
-            evenCount += 1;
-        } else
-            oddCount += 1;
+            evensCount += 1;
+        }
     }
-    console.log('5. Páros elemek száma:', evenCount, '  Páratlan elemek száma:', oddCount);
+    return evensCount;
 }
 
-evensAndOddsCount(numberGroup);
+console.log('5. Páros elemek száma:', evensCount(numberGroup));
+
 
 // LEGKISEBB VAGY LEGNAGYOBB ELEM BUBBLESORT RENDEZÉSSEL
 
@@ -98,18 +102,20 @@ function getNthMaxElement(arr, nth) {
 
 console.log('7. Tömb N.-dik, most 2. legnagyobb eleme:', getNthMaxElement(numberGroup, 2));
 
+
 // TÖMB TARTALMAZZA-E AZ ELEMET? LÍNEÁRIS KERESÉSSEL
 
 function linearSearch(arr, searchNumber) {
     for (let i = 0; i < arr.length; i += 1) {
         if (arr[i] === searchNumber) {
-            return true;
+            return 'Igen';
         }
     }
-    return false;
+    return 'Nem';
 }
 
-console.log('8. Igaz, hogy tartalmazza a 23-at?', linearSearch(numberGroup, 23));
+console.log('8. Igaz, hogy tartalmazza a 23-at? ', linearSearch(numberGroup, 23));
+
 
 // TÖMB TARTALMAZZA-E AZ ELEMET? LOGARITMIKUS KERESÉSSEL
 
@@ -121,17 +127,18 @@ function binarySearch(arr, searchNumber) {
         let mid = Math.floor((start + end) / 2);
 
         if (arr[mid] === searchNumber) {
-            return true
+            return 'Igen';
         }
         else if (arr[mid] < searchNumber)
             start = mid + 1;
         else
             end = mid - 1;
     }
-    return false;
+    return 'Nem';
 }
 
-console.log('9. Igaz, hogy tartalmazza a 23-ast?', binarySearch(numberGroup, 23));
+console.log('9. Igaz, hogy tartalmazza a 23-ast? ', binarySearch(numberGroup, 23));
+
 
 // ADOTT ELEM MEGSZÁMLÁLÁSA
 
@@ -146,6 +153,7 @@ function countElement(arr, searchNum) {
 }
 
 console.log('10. Hány alkalommal szerepel a 23-as szám?', countElement(numberGroup, 23));
+
 
 // BUBBLESORT RENDEZÉS LEBEGŐPONTOS ELEMEKET TARTALMAZÓ TÖMBBEN
 
@@ -178,6 +186,7 @@ function bubbleSort2(arr) {
     return arr;
 }
 
+
 // CSAK SZÁMOK SORBARENDEZÉSE VEGYES TÍPÚSÚ, AZONOS ELEMSZÁMÚ TÖMBÖKBEN
 
 function arraySort(arr) {
@@ -196,6 +205,7 @@ function arraySort(arr) {
 
 console.log('12. A tömb szám elemei csökkenő, a többi rendezetlen sorrendben', arraySort(newArray));
 
+
 // ÚJ ELEM BESZÚRÁSA EGY RENDEZETT TÖMBBE
 
 const numberGroup3 = [43, 545, 2, 80, 7650, 5346, 164, 23];
@@ -208,6 +218,7 @@ function sortAndAddNewNumber(arr, addNum) {
 }
 
 console.log('13. A tömb elemei növekvő sorrendben a tetszőleges szám beszúrása után:', sortAndAddNewNumber((numberGroup3), 777));
+
 
 // STRINGEKET ÉS SZÁMOKAT TARTALMAZÓ TÖMBELEMEK KIÍRÁSA FELVÁLTVA
 
@@ -233,6 +244,7 @@ function stringsAfterNumbers(arr) {
 
 console.log('14. Az iménti tömb sorba rendezve:', stringsAfterNumbers((numsAndStrs)));
 
+
 // PÁROS ÉS PÁRATLAN SZÁMOK KIVÁLOGATÁSA KÜLÖN TÖMBÖKBE
 
 function pairsAndOdds(arr) {
@@ -250,6 +262,7 @@ function pairsAndOdds(arr) {
 }
 
 console.log('15. Páros és páratlan számok tömbbjei:', pairsAndOdds(numberGroup));
+
 
 // KÉT TÖMB UNIÓJA, METSZETE, KÜLÖNBSÉGE, DESCARTES SZORZATA
 
