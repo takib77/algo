@@ -209,15 +209,30 @@ console.log('12. A tömb szám elemei csökkenő, a többi rendezetlen sorrendbe
 // ÚJ ELEM BESZÚRÁSA EGY RENDEZETT TÖMBBE
 
 const numberGroup3 = [43, 545, 2, 80, 7650, 5346, 164, 23];
-console.log('Eredeti tömb, a beszúrnni kért szám a "777".', numberGroup3);
+const numberGroup4 = [435, 5454, 23, 8, 765, 5346, 1646, 23, 60];
 
-function sortAndAddNewNumber(arr, addNum) {
-    arr.push(addNum);
-    bubbleSort(arr);
-    return (arr);
+console.log('Eredeti tömb:', numberGroup3);
+
+function getNumber() {
+    let num;
+    do {
+        num = parseInt(prompt('Adj meg egy számot!'), 10);
+    } while (Number.isNaN(num));
+    return num;
 }
 
-console.log('13. A tömb elemei növekvő sorrendben a tetszőleges szám beszúrása után:', sortAndAddNewNumber((numberGroup3), 777));
+function sortAndAddNewNumber(arr) {
+    const sortedArray = bubbleSort(arr);
+    const number = getNumber();
+    for (let i = 0; i < sortedArray.length; i += 1) {
+        if (number < sortedArray[i]) {
+            sortedArray.splice(i, 0, number);
+            return sortedArray;
+        }
+    }
+}
+
+console.log('13. A tömb elemei növekvő sorrendben a tetszőleges szám beszúrása után:', sortAndAddNewNumber(numberGroup3));
 
 
 // STRINGEKET ÉS SZÁMOKAT TARTALMAZÓ TÖMBELEMEK KIÍRÁSA FELVÁLTVA
@@ -266,14 +281,14 @@ console.log('15. Páros és páratlan számok tömbbjei:', pairsAndOdds(numberGr
 
 // KÉT TÖMB UNIÓJA, METSZETE, KÜLÖNBSÉGE, DESCARTES SZORZATA
 
-console.log('Első tömb:', (numberGroup), 'Második tömb:', (numberGroup3));
+console.log('Első tömb:', (numberGroup4), 'Második tömb:', (numberGroup3));
 
 function union(arr1, arr2) {
     let uni = [];
     return uni.concat(arr1, arr2);
 }
 
-console.log('Uniójuk:', union((numberGroup), (numberGroup3)));
+console.log('Uniójuk:', union((numberGroup4), (numberGroup3)));
 
 function intersect(arr1, arr2) {
     let int = [];
@@ -285,7 +300,7 @@ function intersect(arr1, arr2) {
     return int;
 }
 
-console.log('Metszetük:', intersect((numberGroup), (numberGroup3)));
+console.log('Metszetük:', intersect((numberGroup4), (numberGroup3)));
 
 function difference(arr1, arr2) {
     let common = [];
@@ -300,14 +315,16 @@ function difference(arr1, arr2) {
     return common;
 }
 
-console.log('Különbségük:', difference((numberGroup), (numberGroup3)));
+console.log('Különbségük:', difference((numberGroup4), (numberGroup3)));
 
 function descartes(arr1, arr2) {
-    let newArr = 0;
-    for (let i = 0; i < arr2.length; i += 1) {
-        newArr = arr1[i] * arr2[i];
+    let newArr = [];
+    for (let i = 0; i < arr1.length; i += 1) {
+        for (let j = 0; j < arr2.length; j += 1) {
+            newArr.push(arr1[i] * arr2[j]);
+        }
     }
     return newArr;
 }
 
-console.log('Descartes szorzatuk:', descartes((numberGroup), (numberGroup3)));
+console.log('Descartes szorzatuk:', descartes((numberGroup4), (numberGroup3)));
